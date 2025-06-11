@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anirban Pal | Facebook-style Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --fb-blue: #1877f2;
+            --fb-blue-dark: #166fe5;
+            --fb-green: #42b72a;
+            --fb-green-dark: #36a420;
+            --fb-bg: #f0f2f5;
+            --fb-card-bg: #ffffff;
+            --fb-text-primary: #050505;
+            --fb-text-secondary: #65676b;
+            --fb-divider: #ced0d4;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--fb-bg);
+            color: var(--fb-text-primary);
+        }
+        
+        /* Header Styles */
+        .header {
+            background-color: var(--fb-card-bg);
+            padding: 10px 15px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            color: var(--fb-blue);
+            font-size: 32px;
+            margin-right: 10px;
+        }
+        
+        .search-bar {
+            background-color: var(--fb-bg);
+            padding: 8px 12px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-bar i {
+            color: var(--fb-text-secondary);
+            margin-right: 8px;
+        }
+        
+        .search-bar input {
+            border: none;
+            background: transparent;
+            outline: none;
+            width: 200px;
+        }
+        
+        .header-middle {
+            display: flex;
+        }
+        
+        .header-icon {
+            padding: 10px 40px;
+            color: var(--fb-text-secondary);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .header-icon:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+        }
+        
+        .header-icon.active {
+            color: var(--fb-blue);
+            border-bottom: 3px solid var(--fb-blue);
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+        
+        .profile-pic {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+        
+        /* Main Content */
+        .main-content {
+            display: flex;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Left Sidebar */
+        .left-sidebar {
+            width: 25%;
+            padding-right: 20px;
+        }
+        
+        .sidebar-card {
+            background-color: var(--fb-card-bg);
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .sidebar-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        .sidebar-menu-item:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        
+        .sidebar-menu-item i {
+            width: 30px;
+            color: var(--fb-blue);
+            font-size: 20px;
+        }
+        
+        .profile-info {
+            text-align: center;
+            padding: 20px 0;
+        }
+        
+        .profile-info img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 3px solid var(--fb-blue);
+        }
+        
+        .profile-info h2 {
+            margin-bottom: 5px;
+            font-size: 20px;
+        }
+        
+        .profile-info p {
+            color: var(--fb-text-secondary);
+            font-size: 14px;
+        }
+        
+        /* Main Feed */
+        .main-feed {
+            width: 50%;
+            padding: 0 20px;
+        }
+        
+        .create-post {
+            background-color: var(--fb-card-bg);
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .post-input {
+            display: flex;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--fb-divider);
+        }
+        
+        .post-input img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+        
+        .post-input input {
+            flex: 1;
+            background-color: var(--fb-bg);
+            border: none;
+            border-radius: 20px;
+            padding: 10px 15px;
+            outline: none;
+        }
+        
+        .post-options {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 15px;
+        }
+        
+        .post-option {
+            display: flex;
+            align-items: center;
+            padding: 5px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .post-option:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        
+        .post-option i {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+        
+        .live-video i {
+            color: #f3425f;
+        }
+        
+        .photo-video i {
+            color: #45bd62;
+        }
+        
+        .feeling i {
+            color: #f7b928;
+        }
+        
+        .post {
+            background-color: var(--fb-card-bg);
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .post-user {
+            display: flex;
+            align-items: center;
+        }
+        
+        .post-user img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+        
+        .post-user-info h4 {
+            font-size: 15px;
+        }
+        
+        .post-user-info p {
+            font-size: 13px;
+            color: var(--fb-text-secondary);
+        }
+        
+        .post-content {
+            margin-bottom: 15px;
+        }
+        
+        .post-content p {
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        
+        .post-content img {
+            width: 100%;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        
+        .post-stats {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--fb-divider);
+            color: var(--fb-text-secondary);
+            font-size: 14px;
+        }
+        
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+        }
+        
+        .post-action {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            padding: 8px 0;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .post-action:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        
+        .post-action i {
+            margin-right: 8px;
+        }
+        
+        /* Right Sidebar */
+        .right-sidebar {
+            width: 25%;
+            padding-left: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        .contact-item:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-item img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+        
+        .badge {
+            background-color: var(--fb-blue);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            margin-left: auto;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .left-sidebar {
+                display: none;
+            }
+            
+            .main-feed {
+                width: 100%;
+                padding: 0;
+            }
+            
+            .right-sidebar {
+                display: none;
+            }
+            
+            .header-middle .header-icon {
+                padding: 10px 20px;
+            }
+        }
+        
+        /* Custom Portfolio Styles */
+        .experience-item, .education-item {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--fb-divider);
+        }
+        
+        .experience-item:last-child, .education-item:last-child {
+            border-bottom: none;
+        }
+        
+        .experience-title, .education-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .experience-company, .education-school {
+            color: var(--fb-blue);
+            margin-bottom: 5px;
+        }
+        
+        .experience-duration, .education-duration {
+            color: var(--fb-text-secondary);
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .experience-description, .education-description {
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .skill-tag {
+            background-color: var(--fb-bg);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-left">
+            <div class="logo">
+                <i class="fab fa-facebook"></i>
+            </div>
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search Portfolio...">
+            </div>
+        </div>
+        
+        <div class="header-middle">
+            <div class="header-icon active">
+                <i class="fas fa-home"></i>
+            </div>
+            <div class="header-icon">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="header-icon">
+                <i class="fas fa-briefcase"></i>
+            </div>
+            <div class="header-icon">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <div class="header-icon">
+                <i class="fas fa-star"></i>
+            </div>
+        </div>
+        
+        <div class="header-right">
+            <img src="https://media.licdn.com/dms/image/D5603AQGdQx9g5z3rXw/profile-displayphoto-shrink_400_400/0/1700824026965?e=1721865600&v=beta&t=0M1VY9vY5QHv1mQfQJ0cJx3Z3Q3Z3Q3Z3Q3Z3Q3Z3Q" alt="Profile" class="profile-pic">
+            <span>Anirban</span>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Left Sidebar -->
+        <div class="left-sidebar">
+            <div class="sidebar-card profile-info">
+                <img src="https://media.licdn.com/dms/image/D5603AQGdQx9g5z3rXw/profile-displayphoto-shrink_400_400/0/1700824026965?e=1721865600&v=beta&t=0M1VY9vY5QHv1mQfQJ0cJx3Z3Q3Z3Q3Z3Q3Z3Q3Z3Q" alt="Anirban Pal">
+                <h2>Anirban Pal</h2>
+                <p>Software Engineer | Full Stack Developer</p>
+            </div>
+            
+            <div class="sidebar-card">
+                <div class="sidebar-menu-item">
+                    <i class="fas fa-user-friends"></i>
+                    <span>Connections</span>
+                    <span class="badge">500+</span>
+                </div>
+                <div class="sidebar-menu-item">
+                    <i class="fas fa-building"></i>
+                    <span>Companies</span>
+                </div>
+                <div class="sidebar-menu-item">
+                    <i class="fas fa-users"></i>
+                    <span>Groups</span>
+                </div>
+                <div class="sidebar-menu-item">
+                    <i class="fas fa-newspaper"></i>
+                    <span>News</span>
+                </div>
+            </div>
+            
+            <div class="sidebar-card">
+                <h3>Your Skills</h3>
+                <div class="skills-list">
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">React</span>
+                    <span class="skill-tag">Node.js</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Django</span>
+                    <span class="skill-tag">MongoDB</span>
+                    <span class="skill-tag">MySQL</span>
+                    <span class="skill-tag">AWS</span>
+                    <span class="skill-tag">Docker</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Feed -->
+        <div class="main-feed">
+            <!-- Create Post -->
+            <div class="create-post">
+                <div class="post-input">
+                    <img src="https://media.licdn.com/dms/image/D5603AQGdQx9g5z3rXw/profile-displayphoto-shrink_400_400/0/1700824026965?e=1721865600&v=beta&t=0M1VY9vY5QHv1mQfQJ0cJx3Z3Q3Z3Q3Z3Q3Z3Q3Z3Q" alt="Profile">
+                    <input type="text" placeholder="What's on your mind, Anirban?">
+                </div>
+                <div class="post-options">
+                    <div class="post-option live-video">
+                        <i class="fas fa-video"></i>
+                        <span>Live Video</span>
+                    </div>
+                    <div class="post-option photo-video">
+                        <i class="fas fa-images"></i>
+                        <span>Photo/Video</span>
+                    </div>
+                    <div class="post-option feeling">
+                        <i class="fas fa-smile"></i>
+                        <span>Feeling/Activity</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- About Section -->
+            <div class="post">
+                <div class="post-header">
+                    <div class="post-user">
+                        <img src="https://media.licdn.com/dms/image/D5603AQGdQx9g5z3rXw/profile-displayphoto-shrink_400_400/0/1700824026965?e=1721865600&v=beta&t=0M1VY9vY5QHv1mQfQJ0cJx3Z3Q3Z3Q3Z3Q3Z3Q3Z3Q" alt="Profile">
+                        <div class="post-user-info">
+                            <h4>Anirban Pal</h4>
+                            <p>Updated profile information · 2d</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="post-content">
+                    <h3>About</h3>
+                    <p>Software Engineer with experience in full-stack development. Passionate about building scalable web applications and solving complex problems.</p>
+                    <p>📍 Based in Kolkata, India</p>
+                    <p>📧 anirbanpal2105@gmail.com</p>
+                    <p>🔗 <a href="https://www.linkedin.com/in/anirbanpal2105/" target="_blank">linkedin.com/in/anirbanpal2105</a></p>
+                </div>
+            </div>
+            
+            <!-- Experience Section -->
+            <div class="post">
+                <div class="post-header">
+                    <div class="post-user">
+                        <img src="https://media.licdn.com/dms/image/D5603AQGdQx9g5z3rXw/profile-displayphoto-shrink_400_400/0/1700824026965?e=1721865600&v=beta&t=0M1VY9vY5QHv1mQfQJ0cJx3Z3Q3Z3Q3Z3Q3Z3Q3Z3Q" alt="Profile">
+                        <div class="post-user-info">
+                            <h4>Anirban Pal</h4>
+                            <p>Updated experience · 1w</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="post-content">
+                    <h3>Experience</h3>
+                    
+                    <div class="experience-item">
+                        <div class="experience-title">Software Engineer</div>
+                        <div class="experience-company">XYZ Tech Solutions</div>
+                        <div class="experience-duration">Jan 2023 - Present · 1 yr 6 mos</div>
+                        <div class="experience-description">
+                            <p>Developing and maintaining web applications using React, Node.js, and MongoDB. Collaborating with cross-functional teams to deliver high-quality software solutions.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="experience-item">
+                        <div class="experience-title">Full Stack Developer Intern</div>
+                        <div class="experience-company">ABC Software</div>
+                        <div class="experience-duration">Jun 2022 - Dec 2022 · 7 mos</div>
+                        <div class="experience-description">
+                            <p>Worked on building RESTful APIs and implementing front-end components. Gained experience with Agile development methodologies.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Education Section -->
+            <div class="post">
+                <div class="post-header">
+                    <div class="post-user">
+                        <img src="https://media.licdn.com/dms/image/D5603AQGdQx9g5z3rXw/profile-displayphoto-shrink_400_400/0/1700824026965?e=1721865600&v=beta&t=0M1VY9vY5QHv1mQfQJ0cJx3Z3Q3Z3Q3Z3Q3Z3Q3Z3Q" alt="Profile">
+                        <div class="post-user-info">
+                            <h4>Anirban Pal</h4>
+                            <p>Updated education · 3w</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="post-content">
+                    <h3>Education</h3>
+                    
+                    <div class="education-item">
+                        <div class="education-title">Bachelor of Technology in Computer Science</div>
+                        <div class="education-school">University of Engineering & Management, Kolkata</div>
+                        <div class="education-duration">2019 - 2023</div>
+                        <div class="education-description">
+                            <p>Graduated with honors. Specialized in web development and cloud computing.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Projects Section -->
+            <div class="post">
+                <div class="post-header">
+                    <div class="post-user">
+                        <img src="https://media.licdn.com/dms/image/D5603AQGdQx9g5z3rXw/profile-displayphoto-shrink_400_400/0/1700824026965?e=1721865600&v=beta&t=0M1VY9vY5QHv1mQfQJ0cJx3Z3Q3Z3Q3Z3Q3Z3Q3Z3Q" alt="Profile">
+                        <div class="post-user-info">
+                            <h4>Anirban Pal</h4>
+                            <p>Shared projects · 1mo</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="post-content">
+                    <h3>Featured Projects</h3>
+                    
+                    <div class="experience-item">
+                        <div class="experience-title">E-commerce Platform</div>
+                        <div class="experience-duration">Jan 2023 - Mar 2023</div>
+                        <div class="experience-description">
+                            <p>Built a full-stack e-commerce application with React, Node.js, and MongoDB. Implemented user authentication, product catalog, and payment integration.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="experience-item">
+                        <div class="experience-title">Task Management App</div>
+                        <div class="experience-duration">Aug 2022 - Oct 2022</div>
+                        <div class="experience-description">
+                            <p>Developed a collaborative task management tool with real-time updates using Socket.io and React.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Right Sidebar -->
+        <div class="right-sidebar">
+            <div class="sidebar-card">
+                <h3>Contacts</h3>
+                <div class="contact-item">
+                    <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Contact">
+                    <span>John Doe</span>
+                    <span class="badge">1</span>
+                </div>
+                <div class="contact-item">
+                    <img src="https://randomuser.me/api/portraits/women/2.jpg" alt="Contact">
+                    <span>Jane Smith</span>
+                </div>
+                <div class="contact-item">
+                    <img src="https://randomuser.me/api/portraits/men/3.jpg" alt="Contact">
+                    <span>Mike Johnson</span>
+                </div>
+                <div class="contact-item">
+                    <img src="https://randomuser.me/api/portraits/women/4.jpg" alt="Contact">
+                    <span>Sarah Williams</span>
+                </div>
+                <div class="contact-item">
+                    <img src="https://randomuser.me/api/portraits/men/5.jpg" alt="Contact">
+                    <span>David Brown</span>
+                </div>
+            </div>
+            
+            <div class="sidebar-card">
+                <h3>Groups</h3>
+                <div class="contact-item">
+                    <i class="fas fa-users" style="color: var(--fb-blue); margin-right: 10px;"></i>
+                    <span>JavaScript Developers</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-users" style="color: var(--fb-blue); margin-right: 10px;"></i>
+                    <span>React Community</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-users" style="color: var(--fb-blue); margin-right: 10px;"></i>
+                    <span>Full Stack Engineers</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
